@@ -3,6 +3,7 @@ const utils = require("./utils");
 class Sudoku {
     constructor() {
         this.sudoku = [];
+        this.sudokuSize = 9;
     }
 
     generate() {
@@ -93,15 +94,4 @@ class Sudoku {
     }
 }
 
-const sudoku = new Sudoku();
-sudoku.generate();
-
-let rowStr = "";
-for (let i = 0; i < 81; i++) {
-    rowStr += ` ${sudoku.sudoku[i]} `;
-    
-    if (rowStr.length == 27) {
-        console.log(rowStr);
-        rowStr = "";
-    }
-}
+module.exports = Sudoku;
