@@ -3,6 +3,8 @@ const utils = require("./utils");
 class Sudoku {
     constructor() {
         this.sudoku = [];
+        this.platforms = [];
+        this.visibleSudoku = [];
         this.sudokuSize = 9;
     }
 
@@ -22,9 +24,6 @@ class Sudoku {
             possibleNumbers = this.getPossibleNumbers(rowIndex, colIndex, boxIndex);
             randIndex = utils.getRandomNumFromRange(0, possibleNumbers.length - 1);
 
-            // this.fillSingleProbable(rowIndex, colIndex, boxIndex, i);
-            // if (this.sudoku[i]) {continue;}
-
             if (possibleNumbers.length == 0) {
                 this.sudoku = [];
                 i = -1;
@@ -32,6 +31,8 @@ class Sudoku {
 
             this.sudoku[i] = possibleNumbers[randIndex];
         }
+
+        this.notifyAll();
     }
 
     getPossibleNumbers(rowIndex, colIndex, boxIndex) {
@@ -45,8 +46,6 @@ class Sudoku {
     }
 
     check(sudoku, rowIndex, colIndex, boxIndex, number) {
-        
-        // inside functions cant access to this.sudoku, defining sudoku for check functions
 
         function checkRow(rowIndex, number) {
             for (let i = 0; i < sudoku.length; i++) {
@@ -88,9 +87,21 @@ class Sudoku {
         return checkRow(rowIndex, number) && checkCol(colIndex, number) && checkBox(boxIndex, number);
     }
 
-    // Working without this
-    fillSingleProbable(rowIndex, colIndex, boxIndex, i) {
-        
+    fillSudoku(number, index) {
+        this.visibleSudoku[index] = number;
+        this.notifyAll();
+    }
+
+    notifyAll() {
+        return this.platforms.forEach(platform => platform.update(this.visibleSudoku));
+    }
+
+    subscribe(observer) {
+        this.platforms.push(observer);
+    }
+
+    unsubscribe(observer) {
+        this.platforms = this.platforms.filter(el => el !== observer);
     }
 }
 
