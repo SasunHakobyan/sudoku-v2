@@ -22,6 +22,8 @@ class ShowConsole {
                 str = "";
             }
         }
+
+        console.log("--------------------------");
     }
 }
 
@@ -33,3 +35,6 @@ sudoku.subscribe(showConsole);
 sudoku.subscribe(showHTML);
 
 sudoku.generate();
+
+sudoku.fillSudoku(1, 0);
+sudoku.fillSudoku(4, 76);
