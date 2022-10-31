@@ -7,7 +7,16 @@ class ShowHtml {
         for (let i = 0; i < 81; i++) {
             const itemBox = document.createElement("div");
             itemBox.classList.add("item-box");
-            itemBox.textContent = sudoku[i];
+
+            if (!sudoku[i]) {
+                const inputField = document.createElement("input");
+                inputField.setAttribute("type", "text");
+                inputField.classList.add("number-input");
+                inputField.id = `input-id-${i}`;
+                itemBox.appendChild(inputField);
+            } else {
+                itemBox.textContent = sudoku[i];
+            }
             root.appendChild(itemBox);
         }
     }
