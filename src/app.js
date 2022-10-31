@@ -49,13 +49,13 @@ let activeIndex = 0;
 document.getElementById("addBtn").addEventListener("click", () => {
     const sudoku = new Sudoku();
     const showHTML = new ShowHtml(sudoku);
-
-    console.log("On Click");
+    const dropBtn = document.getElementById("drop-btn");
 
     sudoku.subscribe(showHTML);
     sudoku.generate();
     
     sudokus.push(sudoku);
+    dropBtn.innerHTML = `Sudoku ${sudokus.length}`;
 
     const dropDown = document.getElementById("sudoku-list");
     dropDown.innerHTML = "";
@@ -65,14 +65,18 @@ document.getElementById("addBtn").addEventListener("click", () => {
         dropItem.classList.add("model");
         dropItem.id = `sudoku-${i}`;
         dropItem.innerHTML = `Sudoku ${i+1}`;
-        dropItem.onclick = changeSudoku;
+        dropItem.onclick = switchSudoku;
 
         dropDown.appendChild(dropItem);
     }
 });
 
-function changeSudoku(e) {
+function switchSudoku(e) {
     let sudokuId = e.target.id.slice(-1);
+
+    let dropBtn = document.getElementById("drop-btn");
+    dropBtn.innerHTML = `Sudoku ${Number(sudokuId) + 1}`;
+    
     sudokus[sudokuId].show();
 }
 
