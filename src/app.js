@@ -45,6 +45,8 @@ document.getElementById("addBtn").addEventListener("click", () => {
 
     sudoku.subscribe(showHTML);
     sudoku.generate();
+    
+    sudokus.push(sudoku);
 
     const dropDown = document.getElementById("sudoku-list");
     dropDown.innerHTML = "";
