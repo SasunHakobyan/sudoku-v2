@@ -30,13 +30,33 @@ class Sudoku {
             this.sudoku[i] = possibleNumbers[randIndex];
         }
 
-
         this.generateVisible();
         this.notifyAll();
     }
 
     generateVisible() {
-        
+        let startRange = 0;
+        let endRange = startRange + 8;
+
+        for (let i = 0; i < 9; i++) {
+
+            let tempNums = [];
+
+            for (let j = 0; j < 3; j++) {
+                let index = getRandomNumFromRange(startRange, endRange);
+
+                if (!tempNums.includes(this.sudoku[index])) {
+                    tempNums.push(this.sudoku[index]);
+                    this.visibleSudoku[index] = this.sudoku[index];
+                } else {
+                    j--;
+                }
+            }
+
+            startRange = endRange + 1;
+            endRange = startRange + 8;
+
+        }
     }
 
     getPossibleNumbers(rowIndex, colIndex, boxIndex) {
@@ -101,7 +121,7 @@ class Sudoku {
     }
 
     notifyAll() {
-        return this.platforms.forEach(platform => platform.update(this.sudoku));
+        return this.platforms.forEach(platform => platform.update(this.visibleSudoku));
     }
 
     subscribe(observer) {
