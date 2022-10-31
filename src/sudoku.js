@@ -1,5 +1,3 @@
-const utils = require("./utils");
-
 class Sudoku {
     constructor() {
         this.sudoku = [];
@@ -22,7 +20,7 @@ class Sudoku {
             boxIndex = boxCol + (boxRow * 3);
 
             possibleNumbers = this.getPossibleNumbers(rowIndex, colIndex, boxIndex);
-            randIndex = utils.getRandomNumFromRange(0, possibleNumbers.length - 1);
+            randIndex = getRandomNumFromRange(0, possibleNumbers.length - 1);
 
             if (possibleNumbers.length == 0) {
                 this.sudoku = [];
@@ -32,7 +30,13 @@ class Sudoku {
             this.sudoku[i] = possibleNumbers[randIndex];
         }
 
+
+        this.generateVisible();
         this.notifyAll();
+    }
+
+    generateVisible() {
+        
     }
 
     getPossibleNumbers(rowIndex, colIndex, boxIndex) {
@@ -92,8 +96,12 @@ class Sudoku {
         this.notifyAll();
     }
 
+    show() {
+        this.notifyAll();
+    }
+
     notifyAll() {
-        return this.platforms.forEach(platform => platform.update(this.visibleSudoku));
+        return this.platforms.forEach(platform => platform.update(this.sudoku));
     }
 
     subscribe(observer) {
@@ -105,4 +113,4 @@ class Sudoku {
     }
 }
 
-module.exports = Sudoku;
+// module.exports = Sudoku;

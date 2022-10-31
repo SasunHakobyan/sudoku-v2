@@ -9,9 +9,21 @@
 </head>
 <body>
     <div id="root">
-        
+        <div class="edit-row">
+            <div class="dropdown">
+                <button onclick="dropDownToggler()" class="dropbtn">Sudoku 1</button>
+                <div id="sudoku-list" class="dropdown-list">
+                </div>
+            </div>
+            <div class="add-container">
+                <button id="addBtn">+</button>
+            </div>
+        </div>
+        <div id="sudoku"></div>
     </div>
 
-    <script src="./src/main.js"></script>
+    <script src="./src/utils.js"></script>
+    <script src="./src/sudoku.js"></script>
+    <script src="./src/app.js"></script>
 </body>
 </html>

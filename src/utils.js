@@ -4,4 +4,4 @@ function getRandomNumFromRange(min, max) {
     );
 }
 
-module.exports = {getRandomNumFromRange};
+// module.exports = {getRandomNumFromRange};
