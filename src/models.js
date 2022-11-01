@@ -1,4 +1,20 @@
-class ShowHtml {
+class SudokuHtmlView {
+
+    constructor(parentId, model) {
+        parentId && this.seParentId(parentId);
+        model && this.setModel(model);
+    }
+
+    setModel(model) {
+        if (this.model) {
+            this.model.unsubscribe(showHtm)
+        }
+        this.model = model;
+        if (model) {
+            model.sub
+        }
+    }
+
     update(sudoku) {
 
         const root = document.getElementById("sudoku");
