@@ -1,6 +1,33 @@
 const sudokus = [];
 
-document.getElementById("addBtn").addEventListener("click", () => {
+createSudoku();
+
+document.getElementById("addBtn").addEventListener("click", createSudoku);
+
+document.querySelector(".checkBtn").addEventListener("click", (e) => {
+    const sudokuId = e.target.id;
+    const sudoku = sudokus[sudokuId];
+
+    const userInputs = document.getElementsByClassName("number-input");
+    for (let userInput of userInputs) {
+        const inputValue = Number(userInput.value);
+        const inputSudokuNumIndex = userInput.id.split("-")[1];
+
+        if (!(inputValue) || isNaN(inputValue)) {
+            alert("Please fill all empty fields and valid data");
+            return;
+        }
+
+        if (sudoku.sudoku[inputSudokuNumIndex] != inputValue) {
+            alert("Not Passed");
+            return;
+        }
+    }
+
+    alert("PASSED");
+})
+
+function createSudoku() {
     const sudoku = new Sudoku();
     const showHTML = new ShowHtml(sudoku);
     const dropBtn = document.getElementById("drop-btn");
@@ -26,30 +53,7 @@ document.getElementById("addBtn").addEventListener("click", () => {
 
     const checkBtn = document.getElementsByClassName("checkBtn")[0];
     checkBtn.id = sudokus.length - 1;
-});
-
-document.querySelector(".checkBtn").addEventListener("click", (e) => {
-    const sudokuId = e.target.id;
-    const sudoku = sudokus[sudokuId];
-
-    const userInputs = document.getElementsByClassName("number-input");
-    for (let userInput of userInputs) {
-        const inputValue = Number(userInput.value);
-        const inputSudokuNumIndex = userInput.id.split("-")[1];
-
-        if (!(inputValue) || isNaN(inputValue)) {
-            alert("Please fill all empty fields and valid data");
-            break;
-        }
-
-        if (sudoku.sudoku[inputSudokuNumIndex] != inputValue) {
-            alert("Not Passed");
-            break;
-        }
-    }
-
-    alert("PASSED");
-})
+}
 
 function switchSudoku(e) {
     let sudokuId = e.target.id.slice(-1);
