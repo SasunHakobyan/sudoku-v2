@@ -42,7 +42,7 @@ class Sudoku {
 
             let tempNums = [];
 
-            for (let j = 0; j < 4; j++) {
+            for (let j = 0; j < 5; j++) {
                 let index = getRandomNumFromRange(startRange, endRange);
 
                 if (!tempNums.includes(this.sudoku[index])) {
