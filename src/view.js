@@ -1,3 +1,21 @@
+/*
+constructor(parentId, model) {
+    parentId && this.seParentId(parentId);
+    model && this.setModel(model);
+}
+
+setModel(model) {
+    if (this.model) {
+        this.model.unsubscribe(showHtm)
+    }
+    this.model = model;
+    if (model) {
+        model.sub
+    }
+}
+
+*/
+
 class ShowHtml {
     update(sudoku) {
 
@@ -13,6 +31,25 @@ class ShowHtml {
                 inputField.setAttribute("type", "text");
                 inputField.classList.add("number-input");
                 inputField.id = `id-${i}`;
+
+                inputField.addEventListener("keypress", (e) => {
+                    const sudokuId = document.querySelector(".checkBtn").id;
+
+                    if (e.key == "Enter") {
+                        if (sudokus[sudokuId].sudoku[i] == e.target.value) {
+                            itemBox.classList.add("green");
+                            setTimeout(() => {
+                                itemBox.classList.remove("green");
+                            }, 2000);
+                        } else {
+                            itemBox.classList.add("red");
+                            setTimeout(() => {
+                                itemBox.classList.remove("red");
+                            }, 2000);
+                        }
+                    }
+                })
+
                 itemBox.appendChild(inputField);
             } else {
                 itemBox.textContent = sudoku[i];
